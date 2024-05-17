@@ -1,3 +1,4 @@
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +15,7 @@
                 <div class="heading"><h1>Services</h1></div>
                 <!-- Channels Dropdown -->
                 <div class="dropdown">
-                    <a class="dropdown-toggle" href="#"><b>Channels</b> <span class="dropdown-arrow"></span></a>
+                    <a class="dropdown-toggle" href="#" onclick="showPage('Channels', this)"><b>Channels</b> <span class="dropdown-arrow"></span></a>
                     <div class="dropdown-content channel-names">
                         <a href="#" onclick="showPage('Channel 1', this)"><i>Channel 1</i></a>
                         <a href="#" onclick="showPage('Channel 2', this)"><i>Channel 2</i></a>
@@ -34,7 +35,7 @@
                 <br>
                 <!-- Activity Dropdown -->
                 <div class="dropdown">
-                    <a class="dropdown-toggle" href="#"><b>Activity</b> <span class="dropdown-arrow"></span></a>
+                    <a class="dropdown-toggle" href="#" onclick="showPage('Activity', this)"><b>Activity</b> <span class="dropdown-arrow"></span></a>
                     <div class="dropdown-content activity-links">
                         <a href="#" onclick="showPage('Activity', this, 'mentions')"><i>Mentions</i></a>
                         <a href="#" onclick="showPage('Activity', this, 'threads')"><i>Threads</i></a>
@@ -69,16 +70,19 @@
                 case 'Channel 1':
                 case 'Channel 2':
                 case 'Channel 3':
-                    fetchAndDisplayHTML('channeldetails.html');
+                    fetchAndDisplayChannelDetails(pageName);
                     break;
                 case 'Add Channels':
-                    openModal('Createchannel.html');
+                    openModal('<h2>Create Channel</h2><p>Add channel form goes here.</p>');
                     break;
                 case 'DMs':
-                    fetchAndDisplayHTML('dms.html');
+                    displayDirectMessages();
                     break;
                 case 'Activity':
-                    fetchAndDisplayHTML('Activity.html', () => initializeActivityContent(activity));
+                    fetchAndDisplayHTML('activity.html', () => initializeActivityContent(activity));
+                    break;
+                case 'Channels':
+                    contentDisplay.innerHTML = "<h2><p>Channels Page Content</p></h2>";
                     break;
                 default:
                     break;

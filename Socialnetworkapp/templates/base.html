@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Website{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <a href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="Logo"></a>
+            </div>
+            <div class="navbar-menu">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+                    <!-- Add other navbar links here -->
+                </ul>
+                <div class="navbar-dropdown">
+                    <button class="dropdown-toggle">
+                        <img src="{% static 'images/profile_pic.jpg' %}" alt="Profile Pic">
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="{% url 'profile' %}">View Profile</a>
+                        <a href="{% url 'logout' %}">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="content">
+        <!-- Content from child templates will be placed here -->
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Add your JavaScript links here -->
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Detail</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'your_app/css/style.css' %}">
+</head>
+<body>
+    <div>
+        <h1>{{ conversation }}</h1>
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        <h2>Other Conversations</h2>
+        <ul>
+            {% for conv in conversations %}
+            <li>{{ conv }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

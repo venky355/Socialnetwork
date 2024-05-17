@@ -1,0 +1,19 @@
+
+<!-- your_app/templates/your_app/channel_detail.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="heading"><h1>#{{ channel_name }}</h1></div> 
+    <p>Channel Type: {{ channel_type }}</p>
+    <b><a href="#"><i>Add Description</i></a></b><br><br>
+    <b><a href="#"><i>Add People</i></a></b>
+{% endblock %}
+
+{% block footer %}
+    <footer>
+        <input type="file" id="file_upload" name="file_upload" style="display: none;">
+        <input type="text" placeholder="Type your message...">
+        <label for="file_upload" class="file-upload-label">🔗</label>
+        <button class="button">Send</button>
+    </footer>
+{% endblock %}

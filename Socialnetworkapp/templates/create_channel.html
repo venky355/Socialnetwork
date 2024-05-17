@@ -1,10 +1,13 @@
+<!-- your_app/templates/your_app/create_channel.html -->
+{% extends 'base.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Channel</title>
-    <link rel="stylesheet" href="style.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'your_app/css/style.css' %}">
 </head>
 <body>
     <form onsubmit="handleSubmit(event)">
@@ -22,8 +25,8 @@
             event.preventDefault();
             const channelName = document.getElementById('channelName').value;
             const channelType = document.querySelector('input[name="channelType"]:checked').value;
-            // Redirect to channeldetails.html with the channel name and type as parameters
-            window.location.href = `channeldetails.html?name=${encodeURIComponent(channelName)}&type=${channelType}`;
+            // Redirect to channel_detail view with the channel name and type as parameters
+            window.location.href = `/channel_detail/?name=${encodeURIComponent(channelName)}&type=${channelType}`;
         }
     </script>
 </body>

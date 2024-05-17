@@ -1,12 +1,12 @@
-<!-- myapp/templates/activity.html -->
-
+<!-- your_app/templates/your_app/activity.html -->
+{% load static %}
+{% extends 'base.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Activity</title>
-    {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
@@ -15,15 +15,47 @@
     </div>
 
     <div class="activity-container">
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Submit</button>
-        </form>
+        <div class="activity-option" onclick="showContent('mentions', this)">Mentions</div>
+        <div class="activity-option" onclick="showContent('threads', this)">Threads</div>
+        <div class="activity-option" onclick="showContent('reactions', this)">Reactions</div>
+        <div class="activity-option" onclick="showContent('invitations', this)">Invitations</div>
     </div>
 
     <div id="activity-content">
-        {{ content }}
+        Select an activity option to view content.
     </div>
+
+    <script>
+        function showContent(activity, element) {
+            var content = "";
+            switch (activity) {
+                case "mentions":
+                    content = "📧 No mentions yet.";
+                    break;
+                case "threads":
+                    content = "@ No threads yet.";
+                    break;
+                case "reactions":
+                    content = "😑 No reactions yet.";
+                    break;
+                case "invitations":
+                    content = "📩 No invitations yet.";
+                    break;
+                default:
+                    content = "Select an activity option to view content.";
+                    break;
+            }
+            document.getElementById("activity-content").innerText = content;
+
+            // Remove the 'selected' class from all options
+            var options = document.getElementsByClassName('activity-option');
+            for (var i = 0; i < options.length; i++) {
+                options[i].classList.remove('selected');
+            }
+
+            // Add the 'selected' class to the clicked option
+            element.classList.add('selected');
+        }
+    </script>
 </body>
 </html>

@@ -1,4 +1,5 @@
 {% load static %}
+{% extends 'base.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,5 +75,41 @@
             alert("Adding teammates...");
         });
     </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direct Messages</title>
+</head>
+<body>
+    <h1>Direct Messages</h1>
+    <div>
+        <h2>Conversations</h2>
+        <ul>
+            {% for conversation in conversations %}
+                <li>{{ conversation }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+        <h2>Default Conversation: {{ default_conversation }}</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit">Send Message</button>
+        </form>
+        <div>
+            <h3>Message History</h3>
+            <ul>
+                {% for message in message_history %}
+                    <li><strong>{{ message.sender }}</strong>: {{ message.message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 </body>
 </html>
