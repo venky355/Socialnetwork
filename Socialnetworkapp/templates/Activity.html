@@ -1,0 +1,29 @@
+<!-- myapp/templates/activity.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="heading">
+        <h1>User Activity</h1>
+    </div>
+
+    <div class="activity-container">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div id="activity-content">
+        {{ content }}
+    </div>
+</body>
+</html>

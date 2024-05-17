@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Navigation</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="right-side">
+            <div class="pages-container">
+                <div class="heading"><h1>Services</h1></div>
+                <!-- Channels Dropdown -->
+                <div class="dropdown">
+                    <a class="dropdown-toggle" href="#"><b>Channels</b> <span class="dropdown-arrow"></span></a>
+                    <div class="dropdown-content channel-names">
+                        <a href="#" onclick="showPage('Channel 1', this)"><i>Channel 1</i></a>
+                        <a href="#" onclick="showPage('Channel 2', this)"><i>Channel 2</i></a>
+                        <a href="#" onclick="showPage('Channel 3', this)"><i>Channel 3</i></a>
+                        <a href="#" onclick="showPage('Add Channels', this)"><i>+ Add Channels</i></a>
+                    </div>
+                </div>
+                <br>
+                <!-- DMs Dropdown -->
+                <div class="dropdown">
+                    <a class="dropdown-toggle" href="#"><b>DMs</b> <span class="dropdown-arrow"></span></a>
+                    <div class="dropdown-content browse-people">
+                        <a href="#" onclick="browseAllPeople()"><i>Browse All People</i></a>
+                        <a href="#" onclick="addTeammate()"><i>Add Teammate</i></a>
+                    </div>
+                </div>
+                <br>
+                <!-- Activity Dropdown -->
+                <div class="dropdown">
+                    <a class="dropdown-toggle" href="#"><b>Activity</b> <span class="dropdown-arrow"></span></a>
+                    <div class="dropdown-content activity-links">
+                        <a href="#" onclick="showPage('Activity', this, 'mentions')"><i>Mentions</i></a>
+                        <a href="#" onclick="showPage('Activity', this, 'threads')"><i>Threads</i></a>
+                        <a href="#" onclick="showPage('Activity', this, 'reactions')"><i>Reactions</i></a>
+                        <a href="#" onclick="showPage('Activity', this, 'invitations')"><i>Invitations</i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="left-side" id="contentDisplay">
+            <h2><p>Thank you for Registering with us<br>
+            Welcome to Our Application</p></h2>
+        </div>
+    </div>
+    
+    <!-- Modal structure -->
+    <div id="addChannelModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+    
+    <script>
+        function showPage(pageName, element, activity = null) {
+            var contentDisplay = document.getElementById("contentDisplay");
+            var links = document.querySelectorAll('.dropdown a');
+            links.forEach(link => link.classList.remove('selected'));
+            if (element) element.classList.add('selected');
+
+            switch (pageName) {
+                case 'Channel 1':
+                case 'Channel 2':
+                case 'Channel 3':
+                    fetchAndDisplayHTML('channeldetails.html');
+                    break;
+                case 'Add Channels':
+                    openModal('Createchannel.html');
+                    break;
+                case 'DMs':
+                    fetchAndDisplayHTML('dms.html');
+                    break;
+                case 'Activity':
+                    fetchAndDisplayHTML('Activity.html', () => initializeActivityContent(activity));
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        function fetchAndDisplayHTML(htmlFilePath, callback) {
+            fetch(htmlFilePath)
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById("contentDisplay").innerHTML = html;
+                if (callback) callback();
+            })
+            .catch(error => console.log('Error fetching HTML:', error));
+        }
+
+        function openModal(htmlFilePath) {
+            fetch(htmlFilePath)
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById("modalContent").innerHTML = html;
+                    document.getElementById("addChannelModal").style.display = "block";
+                })
+                .catch(error => console.log('Error fetching HTML:', error));
+        }
+
+        function closeModal() {
+            document.getElementById("addChannelModal").style.display = "none";
+        }
+
+        function initializeActivityContent(defaultActivity) {
+            if (defaultActivity) {
+                showContent(defaultActivity, document.querySelector(`.activity-links a[onclick="showPage('Activity', this, '${defaultActivity}')"]`));
+            }
+        }
+
+        function showContent(activity, element) {
+            var content = "";
+            switch (activity) {
+                case "mentions":
+                    content = "📧 No mentions yet.";
+                    break;
+                case "threads":
+                    content = "@ No threads yet.";
+                    break;
+                case "reactions":
+                    content = "😑 No reactions yet.";
+                    break;
+                case "invitations":
+                    content = "📩 No invitations yet.";
+                    break;
+                default:
+                    content = "Select an activity option to view content.";
+                    break;
+            }
+            document.getElementById("contentDisplay").innerHTML = content;
+
+            var options = document.querySelectorAll('.dropdown-content a');
+            options.forEach(option => option.classList.remove('selected'));
+
+            element.classList.add('selected');
+        }
+
+        function browseAllPeople() {
+            alert("Browsing all people...");
+        }
+
+        function addTeammate() {
+            alert("Adding a teammate...");
+        }
+    </script>
+</body>
+</html>

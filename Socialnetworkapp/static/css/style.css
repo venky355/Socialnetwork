@@ -1,0 +1,273 @@
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #333; /* Set heading color */
+}
+
+.heading {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    text-shadow: 1.5px 1.5px 1.5px rgba(0, 0, 0, 0.5);
+    font-size: 15px;
+}
+
+p {
+    font-size: 18px;
+    color: #12093b;
+}
+
+/* Layout */
+.container {
+    display: flex;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.left-side {
+    width: 80%;
+    background-color: #e3e1e1;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.right-side {
+    width: 25%;
+    background-color: #ccc;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 20%;
+    background-color: #dfdbdb;
+    height: 100vh;
+}
+
+/* Dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.dropdown-content {
+    display: none;
+    background-color: #e3e1e1;
+    min-width: 160px;
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown a {
+    color: rgb(103, 42, 83);
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    font-size: 15px;
+}
+
+.dropdown a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown-arrow::after {
+    content: '\25BC';
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+/* Selected Item */
+.selected {
+    color: rgb(17, 17, 17) !important;
+    font-weight: bold;
+}
+
+/* Modal styles */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+}
+
+.modal-content {
+    background-color:#dadada;
+    padding: 25px;
+    position: absolute;
+    top: 0;
+    right: 57.9%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    cursor: pointer;
+}
+
+/* Form styles */
+form {
+    margin-top: 10px; /* Add space above the form */
+}
+
+input[type="text"] {
+    padding: 10px; /* Add padding for better look */
+    border: 1px solid #ccc; /* Add a light border */
+    border-radius: 5px; /* Add some border radius for rounded corners */
+    display: block; /* Ensure input fields are displayed as block elements */
+    margin-bottom: 10px; /* Add space between input fields */
+}
+
+label {
+    display: block; /* Ensure labels are displayed as block elements */
+    margin-bottom: 5px; /* Add space between labels */
+}
+
+.radio-group {
+    display: flex; /* Use flexbox to align radio buttons side by side */
+    gap: 10px; /* Add space between radio buttons */
+    align-items: center; /* Align items vertically in the flex container */
+}
+
+.radio-group label {
+    margin-bottom: 0; /* Remove bottom margin for labels */
+}
+
+/* Button styles */
+.button {
+    background-color: #4CAF50; /* Set green background color */
+    color: white; /* Set text color to white */
+    padding: 10px 20px; /* Add padding for a better look */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Add some border radius for rounded corners */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    display: block; /* Ensure button is displayed as a block element */
+    margin-top: 10px; /* Add space above the button */
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+/* Conversation area */
+.conversation-area {
+    flex: 1;
+    padding: 20px;
+    border-left: 2px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+
+.conversation {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+.conversation:hover {
+    background-color: #eaeaea;
+}
+
+.conversation.active {
+    background-color: #dcdcdc;
+}
+
+/* Message input */
+.message-input {
+    margin-top: 20px;
+}
+
+.message-input-inner {
+    display: flex;
+    align-items: center;
+}
+
+.message-input-inner input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.message-input-inner button {
+    padding: 10px 20px; /* Add padding for a better look */
+    margin-left: 10px;
+    background-color: #4CAF50; /* Set green background color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.message-input-inner button:hover {
+    background-color: #0056b3;
+}
+
+.message-area {
+    margin-top: 20px;
+    height: 300px;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #c1c0c0;
+}
+
+.sender {
+    font-weight: bold;
+}
+
+/* Activity container */
+.activity-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #d4d4d4;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+/* Style for individual activity options */
+.activity-option {
+    display: inline-block;
+    background-color: #b7b7b7;
+    border-radius: 100px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Highlight style for the selected activity option */
+.activity-option.selected {
+    background-color: #8a8a8a; /* Change to your desired highlight color */
+}
+
+/* Content area to display different content based on activity option */
+#activity-content {
+    padding: 25px; /* Adjust padding */
+    font-size: 30px; /* Increase font size */
+}

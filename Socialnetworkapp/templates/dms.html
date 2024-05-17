@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direct Messages - Slack Clone</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Conversations</h2>
+            <div class="conversation" id="conversation1">User 1</div>
+            <div class="conversation" id="conversation2">User 2</div>
+            <div class="conversation" id="conversation3">User 3</div>
+            <!-- Add more conversations as needed -->
+            <div class="conversation" id="browsePeople"><i>Browse All People</i></div>
+            <div class="conversation" id="addTeammates"><i>Add Teammates</i></div>
+        </div>
+        <div class="conversation-area">
+            <h2>Conversation with User 1</h2>
+            <div class="message-area" id="messageArea">
+                <!-- Messages will be displayed here -->
+            </div>
+            <div class="message-input">
+                <div class="message-input-inner">
+                    <input type="text" id="messageInput" placeholder="Type your message...">
+                    <button onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to send a message
+        function sendMessage() {
+            var messageInput = document.getElementById("messageInput");
+            var message = messageInput.value.trim();
+            if (message !== "") {
+                var messageArea = document.getElementById("messageArea");
+                var messageElement = document.createElement("div");
+                messageElement.classList.add("message");
+                messageElement.innerHTML = "<span class='sender'>You:</span> " + message;
+                messageArea.appendChild(messageElement);
+                messageInput.value = "";
+                // Scroll to the bottom of the message area
+                messageArea.scrollTop = messageArea.scrollHeight;
+            }
+        }
+
+        // Function to switch between conversations
+        document.querySelectorAll('.conversation').forEach(conversation => {
+            conversation.addEventListener('click', function() {
+                document.querySelectorAll('.conversation').forEach(conversation => {
+                    conversation.classList.remove('active');
+                });
+                this.classList.add('active');
+                // Change the conversation title
+                var conversationTitle = this.textContent.trim();
+                document.querySelector('.conversation-area h2').textContent = "Conversation with " + conversationTitle;
+                // Clear the message area
+                document.getElementById("messageArea").innerHTML = "";
+            });
+        });
+
+        // Example function for browsing all people
+        document.getElementById("browsePeople").addEventListener('click', function() {
+            alert("Browsing all people...");
+        });
+
+        // Example function for adding teammates
+        document.getElementById("addTeammates").addEventListener('click', function() {
+            alert("Adding teammates...");
+        });
+    </script>
+</body>
+</html>

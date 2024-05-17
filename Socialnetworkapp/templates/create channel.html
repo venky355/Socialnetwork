@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Channel</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form onsubmit="handleSubmit(event)">
+        <input type="text" id="channelName" placeholder="Channel Name" required>
+        <div class="radio-group">
+            <input type="radio" id="public" name="channelType" value="public" checked>
+            <label for="public">Public</label>
+            <input type="radio" id="private" name="channelType" value="private">
+            <label for="private">Private</label>
+        </div>
+        <button type="submit" class="button">Create</button>
+    </form>
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            const channelName = document.getElementById('channelName').value;
+            const channelType = document.querySelector('input[name="channelType"]:checked').value;
+            // Redirect to channeldetails.html with the channel name and type as parameters
+            window.location.href = `channeldetails.html?name=${encodeURIComponent(channelName)}&type=${channelType}`;
+        }
+    </script>
+</body>
+</html>
